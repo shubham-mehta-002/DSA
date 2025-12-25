@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/apple-redistribution-into-boxes/description/
+
 #include<bits/stdc++.h>
 using namespace std;
 
