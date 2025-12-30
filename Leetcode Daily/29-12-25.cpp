@@ -10,11 +10,11 @@ public:
 
         if (end == 0) return true;
 
-        if (bad.contains(bottom))
+        if (bad.count(bottom))
             return false;
 
         string base = bottom.substr(current, 2);
-        if (!combinations.contains(base))
+        if (!combinations.count(base))
             return bad[bottom] = false;
 
         char old = bottom[current];  // for backtracking
