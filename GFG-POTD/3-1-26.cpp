@@ -14,7 +14,6 @@ public:
     }
 };
 
-
 class Solution {
     Node* merge(Node* h1, Node*h2){
         Node* dummy = new Node(-1);
