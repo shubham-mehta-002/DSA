@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    void rearrangeQueue(queue<int> &q) {
+        queue<int>temp;
+        int n = q.size();
+        
+        int count = n/2;
+        
+        while(count--){
+            temp.push(q.front());
+            q.pop();
+        }        
+        
+        while(!temp.empty()){
+            q.push(temp.front());
+            temp.pop();
+            
+            q.push(q.front());
+            q.pop();
+        }
+        
+    }
+};
