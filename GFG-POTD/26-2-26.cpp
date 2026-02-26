@@ -1,41 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 class Solution
 {
 public:
-    int longestSubarray(vector<int> &arr, int k)
+    virtual bool areIsomorphic(string &s1, string &s2)
     {
-        int n = arr.size();
-        int j = 0;
-        unordered_map<int, int> mpp;
-        int count = 0;
-        int maxLen = 0;
+        int booked1[26];
+        int booked2[26];
 
-        while (j < n)
+        for (int i = 0; i < 26; i++)
         {
-            if (arr[j] > k)
-                count++;
-            else
-                count--;
-
-            if (count > 0)
-            {
-                maxLen = max(maxLen, j + 1);
-            }
-
-            if (mpp.find(count - 1) != mpp.end())
-            {
-                maxLen = max(maxLen, j - mpp[count - 1]);
-            }
-
-            if (mpp.find(count) == mpp.end())
-            {
-                mpp[count] = j;
-            }
-            j++;
+            booked1[i] = -1;
+            booked2[i] = -1;
         }
 
-        return maxLen;
+        int n = s1.size();
+        for (int i = 0; i < n; i++)
+        {
+            int is1 = s1[i] - 97, is2 = s2[i] - 97;
+            if (booked1[is1] == -1 && booked2[is2] == -1)
+            {
+                booked1[is1] = is2;
+                booked2[is2] = is1;
+            }
+            else if (booked1[is1] != is2 || booked2[is2] != is1)
+                return false;
+        }
+
+        return true;
     }
 };
