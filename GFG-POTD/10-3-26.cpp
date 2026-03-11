@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-\class Solution
+class Solution
 {
 public:
     int countSubarrays(vector<int> &arr)
