@@ -1,47 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 class Solution
 {
 public:
     vector<int> getLIS(vector<int> &arr)
     {
         int n = arr.size();
-        vector<pair<int, int>> lis(n, {1, -1});
+        vector<int> parent(n, -1);
+        vector<int> dp(n, 1);
+        int maxIdx = 0;
+        int maxx = 0;
 
-        int globalMaxIndex = 0;
-
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i < n; i++)
         {
-            int maxx = 0;
-            int index = -1;
-
             for (int j = 0; j < i; j++)
             {
-                if (arr[j] < arr[i] && lis[j].first > maxx)
+                if (arr[j] < arr[i] && dp[i] < dp[j] + 1)
                 {
-                    maxx = lis[j].first;
-                    index = j;
+                    dp[i] = dp[j] + 1;
+                    parent[i] = j;
+                    if (dp[i] > maxx)
+                    {
+                        maxIdx = i;
+                    }
+                    maxx = max(maxx, dp[i]);
                 }
-            }
-            lis[i].first += maxx;
-            lis[i].second = index;
-
-            if (lis[globalMaxIndex].first < lis[i].first)
-            {
-                globalMaxIndex = i;
             }
         }
 
-        // backTrack
         vector<int> res;
-        while (globalMaxIndex != -1)
+        int start = maxIdx;
+
+        while (maxIdx != -1)
         {
-            res.push_back(arr[globalMaxIndex]);
-            globalMaxIndex = lis[globalMaxIndex].second;
+            res.push_back(arr[maxIdx]);
+            maxIdx = parent[maxIdx];
         }
 
         reverse(res.begin(), res.end());
+
         return res;
     }
 };
