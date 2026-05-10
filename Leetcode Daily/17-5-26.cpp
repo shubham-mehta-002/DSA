@@ -10,7 +10,7 @@ public:
     {
         vis[index] = 1;
 
-        if (mem.contains(index))
+        if (mem.find(index) != mem.end())
         {
             return mem[index];
         }
