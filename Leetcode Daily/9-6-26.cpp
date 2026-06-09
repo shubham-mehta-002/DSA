@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Solution
 
+class Solution
 {
 public:
     long long maxTotalValue(vector<int> &nums, int k)
