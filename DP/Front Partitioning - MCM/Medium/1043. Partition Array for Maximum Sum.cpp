@@ -7,24 +7,30 @@ public:
     int maxSumAfterPartitioning(vector<int> &arr, int k)
     {
         int n = arr.size();
-        vector<int> dp(n + 1, 0);
+        vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
 
-        for (int l = n - 1; l >= 0; l--)
+        // base case
+        for (int state = 0; state <= k; state++)
         {
-            int maxx = 0;
-            int maxVal = 0;
-            for (int i = 0; i < k; i++)
-            {
-                if (l + i >= n)
-                    break;
-                maxVal = max(maxVal, arr[i + l]);
-                int currSum = maxVal * (i + 1);
-                maxx = max(maxx, currSum + dp[l + i + 1]);
-            }
-
-            dp[l] = maxx;
+            dp[n][k] = 0;
         }
 
-        return dp[0];
+        for (int index = n - 1; index >= 0; index--)
+        {
+            for (int state = 0; state <= k; state++)
+            {
+                int finalRes = 0;
+                int maxVal = 0;
+                for (int i = index; i < min(k + index, (int)arr.size()); i++)
+                {
+                    maxVal = max(maxVal, arr[i]);
+                    finalRes = max(finalRes, maxVal * (i - index + 1) + dp[i + 1][k]);
+                }
+
+                dp[index][state] = finalRes;
+            }
+        }
+
+        return dp[0][0];
     }
 };
