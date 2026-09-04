@@ -28,6 +28,7 @@ public:
         }
 
         // negative cycle check
+        // if dist[to] can be minimized further on nth iteration, then there is a negative cycle
         for (auto e : edges)
         {
             int from = e[0];
